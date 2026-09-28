@@ -23,7 +23,7 @@ function inserirForncedor(PDO $conexao, string $nome):void {
     os dados para a consulta. NUNCA passe os dados de forma direta */
     
     //Passo 1: definir os parâmetros nomeados
-    $sql = "INSERT INTO forncedores (nome) VALUES($nome)";
+    $sql = "INSERT INTO fornecedores (nome) VALUES(:nome)";
 
     //Passo 2: preparar o comando para execução
     $consulta = $conexao->prepare($sql);
