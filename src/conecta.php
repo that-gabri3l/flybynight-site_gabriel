@@ -30,4 +30,4 @@ try {
 }
 
 //Teste provisorio
-var_dump($conexao);
+//var_dump($conexao);
