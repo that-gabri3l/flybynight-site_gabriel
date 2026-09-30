@@ -13,7 +13,6 @@ $id = $_GET['id'];
 // 2)Ao término, a função DEVOLVE (retorna) um array com os dados do Fornecedor
 $fornecedor = buscarFornecedoresPorId($conexao, $id);
 
-var_dump($fornecedor);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,9 +35,11 @@ var_dump($fornecedor);
         <!-- Modelo visual: os campos não são enviados nem persistidos. -->
         <!-- Os campos serão preenchidos com os dados do registro selecionado. -->
         <form action="" method="post">
+            <!-- Usamos um campo oculto (input hidden) para garantir que o formulario tambem possuiu o id do fornecedor -->
+            <input type="hidden" name="id" value="<?= $fornecedor['id'] ?>">
             <div>
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome" maxlength="100" required>
+                <input value="<?= $fornecedor['nome'] ?>" type="text" name="nome" id="nome" maxlength="100" required>
             </div>
             <button type="submit">Atualizar</button>
         </form>
