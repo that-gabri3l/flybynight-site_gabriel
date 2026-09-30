@@ -47,7 +47,7 @@ $fornecedores = buscarFornecedores($conexao);
         <!-- Link Dinâmico
         Alem de definir a pagina a ser aberta/navegado (no caso, editar.php), tambem é necessario "informar" à pagina com qual registro ela irá trabalhar. Por ussi, criamos um parâmetro (?id) e aplicamos à ele o valor dinâmico (id) do fornecedor. -->
         <a href="editar.php?id=<?= $fornecedor["id"] ?>">Editar</a>
-        <a href="excluir.php" class="excluir">Excluir</a>
+        <a href="excluir.php?id=<?= $fornecedor["id"] ?>" class="excluir">Excluir</a>
                         </td>
                     </tr>
                 <?php endforeach ?>
