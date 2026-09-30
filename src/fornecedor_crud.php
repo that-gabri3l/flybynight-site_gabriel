@@ -46,7 +46,7 @@ function buscarFornecedoresPorId(PDO $conexao, int $id){
     $consulta = $conexao->prepare($sql);
     
     //Atribuição do valor recebido (em $id) ao parâmetro nomeado (:id)
-    $consulta->bindValue(":id", $id);
+    $consulta->bindValue(":id_fornecedor", $id);
 
     //Execução da consulta
     $consulta->execute();
