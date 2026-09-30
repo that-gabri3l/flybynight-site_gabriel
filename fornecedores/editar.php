@@ -1,3 +1,11 @@
+<?php 
+//fornecedores/editar.php
+
+//Acessar a URL e "pegar" o valor do parâmetro (id) existente nela
+$id = $_GET['id'];
+
+echo $id;
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
