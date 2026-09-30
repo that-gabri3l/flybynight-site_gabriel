@@ -55,3 +55,22 @@ function buscarFornecedoresPorId(PDO $conexao, int $id){
     //ATENÇÃO: aqui usamos fetch() por se tratar de UM UNICO array (vetor)
     return $consulta->fetch();
 }
+
+function atualizarFornecedor(PDO $conexao,int $id, string $nome):void{
+
+    //Comando SQL
+    $sql = "UPDATE fornecedores SET nome = :nome WHERE id = :id_fornecedor";
+
+
+    //Preparar comando SQL
+    $consulta = $conexao->prepare($sql);
+
+
+    //Atribuir valores aos campos
+    $consulta->bindValue(":nome", $nome);
+    $consulta->bindValue(":id_fornecedor", $id);
+
+    
+    //Executar
+    $consulta->execute();
+}
