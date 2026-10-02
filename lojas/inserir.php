@@ -1,3 +1,15 @@
+<?php
+require_once "../src/loja_crud.php";
+
+if($_SERVER['REQUEST_METHOD'] === "POST"){
+    $nome = trim(
+        filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
+        );
+    inserirLoja($conexao, $nome);
+    header("location:listar.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -16,7 +28,6 @@
     ?>
     <main>
         <h2>Cadastrar loja</h2>
-        <!-- Modelo visual: os campos não são enviados nem persistidos. -->
         <form action="" method="post">
             <div>
                 <label for="nome">Nome:</label>
