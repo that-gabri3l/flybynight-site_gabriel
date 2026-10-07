@@ -1,3 +1,26 @@
+<?php 
+// produtos/inserir.php
+require_once "../src/fornecedor_crud.php";
+require_once "../src/produto_crud.php";
+
+// Buscando a lista de fornecedores já existentes
+// Isso é necessário para o campo de seleção de fornecedores no formulário
+$fornecedores = buscarFornecedores($conexao);
+
+/* Exercícios: */
+
+// 1) Detectar o acionamento do formulário de inserção
+
+// 2) Capturar os dados do formulário
+
+// 3) Chamar a função de inserir e passar os dados para ela
+
+// 4) Redirecionar para a página que mostra os produtos
+
+// 5) Cadastre pelo menos 3 produtos (invente os dados)
+
+// 6) Veja também no phpMyAdmin se está tudo OK na tabela produtos
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -37,8 +60,14 @@
             <div>
                 <label for="fornecedor">Fornecedor:</label>
                 <select name="fornecedor" id="fornecedor" required>
-                    <option value="">Selecione</option>
-                    <!-- As opções serão preenchidas com os registros do banco de dados. -->
+                    <option value=""></option>
+                    
+                    <?php foreach($fornecedores as $fornecedor): ?>
+                        <option value="<?= $fornecedor['id'] ?>"> 
+                            <?= $fornecedor['nome'] ?> 
+                        </option>
+                    <?php endforeach ?>
+
                 </select>
             </div>
             <button type="submit">Salvar</button>
