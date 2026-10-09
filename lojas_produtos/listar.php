@@ -1,3 +1,7 @@
+<?php
+require_once "../src/loja_produto_crud.php";
+$lojasProdutos = buscarLojasProdutos($conexao);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -18,7 +22,6 @@
         <h2>Produtos por loja</h2>
         <p>Gerencie os vínculos e o estoque de cada produto nas lojas. A exclusão remove somente o vínculo.</p>
         <div class="barra-acoes"><a class="botao" href="inserir.php">+ Novo vínculo</a></div>
-        <!-- Os registros serão carregados dinamicamente quando o back-end for implementado. -->
         <div class="area-tabela" tabindex="0">
             <table>
                 <caption>Relação de Produtos por loja</caption>
@@ -31,7 +34,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Aqui serão geradas as linhas com os dados e as ações Editar e Excluir de cada registro. -->
+                    <?php foreach ($lojasProdutos as $lojaProduto): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($lojaProduto["nome_loja"], ENT_QUOTES, "UTF-8") ?></td>
+                            <td><?= htmlspecialchars($lojaProduto["nome_produto"], ENT_QUOTES, "UTF-8") ?></td>
+                            <td><?= htmlspecialchars((string) $lojaProduto["estoque"], ENT_QUOTES, "UTF-8") ?></td>
+                            <td>
+                                <a href="editar.php?loja_id=<?= (int) $lojaProduto["loja_id"] ?>&amp;produto_id=<?= (int) $lojaProduto["produto_id"] ?>">Editar</a>
+                                <a href="excluir.php?loja_id=<?= (int) $lojaProduto["loja_id"] ?>&amp;produto_id=<?= (int) $lojaProduto["produto_id"] ?>">Excluir</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

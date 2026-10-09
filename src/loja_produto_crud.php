@@ -34,3 +34,5 @@ function inserirLojaProduto(
     $consulta->execute();
 }
 
+
+
