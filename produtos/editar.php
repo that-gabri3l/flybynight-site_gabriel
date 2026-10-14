@@ -19,11 +19,22 @@ $fornecedores = buscarFornecedores($conexao);
 $produto = buscarProdutoPorId($conexao, $id);
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    $nome = $_POST['nome'];
-    $descricao = $_POST['descricao'];
-    $preco = $_POST['preco'];
-    $quantidade = $_POST['quantidade'];
-    $fornecedor = $_POST['fornecedor'];
+    $nome = trim($_POST['nome'] ?? '');
+    $descricao = $_POST['descricao'] ?? '';
+    $preco = filter_input(INPUT_POST, 'preco', FILTER_VALIDATE_FLOAT);
+    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_VALIDATE_INT);
+    $fornecedor = filter_input(INPUT_POST, 'fornecedor', FILTER_VALIDATE_INT);
+
+    if (
+        $nome === ''
+        || $preco === false || $preco < 0 || $preco > 9999999.99
+        || $quantidade === false || $quantidade < 0
+        || $fornecedor === false || $fornecedor < 1
+    ) {
+        http_response_code(400);
+        exit("Dados inválidos para atualizar o produto.");
+    }
+
     atualizarProduto($conexao, $id, $nome, $descricao, $preco, $quantidade, $fornecedor);
     header("location:listar.php");
     exit;
