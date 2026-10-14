@@ -48,6 +48,54 @@ $lojas = buscarLojas($conexao);
             </table>
         </div>
     </main>
+    <dialog id="dialogoExclusao">
+        <p>Tem certeza que deseja excluir este registro?</p>
+        <div>
+            <button id="cancelarExclusao" type="button">Cancelar</button>
+            <button id="confirmarExclusao" type="button">Confirmar</button>
+        </div>
+    </dialog>
+
+    <script>
+        //O botão de confirmar fecha o modal e, em seguida, executa o redirecionamento manual (window.location.href = hrefExclusao) para a URL que foi salva lá em cima, efetivando a exclusão.
+        const dialogoExclusao = document.getElementById('dialogoExclusao');
+        const cancelarExclusao = document.getElementById('cancelarExclusao');
+        const confirmarExclusao = document.getElementById('confirmarExclusao');
+        let hrefExclusao = '';
+
+        document.querySelectorAll('a.excluir').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                hrefExclusao = link.href;
+                dialogoExclusao.showModal();
+            });
+        });
+
+        confirmarExclusao.addEventListener('click', () => {
+            dialogoExclusao.close();
+            if (hrefExclusao) {
+                window.location.href = hrefExclusao;
+            }
+        });
+
+        cancelarExclusao.addEventListener('click', () => {
+            dialogoExclusao.close();
+        });
+//Ela calcula as dimensões do modal na tela (getBoundingClientRect). Se o usuário clicar em uma coordenada (event.clientY e event.clientX) que esteja fora dessas dimensões (ou seja, no fundo escuro), o modal é fechado.
+        dialogoExclusao.addEventListener('click', (event) => {
+            const rect = dialogoExclusao.getBoundingClientRect();
+            const isInside = (
+                rect.top <= event.clientY &&
+                event.clientY <= rect.bottom &&
+                rect.left <= event.clientX &&
+                event.clientX <= rect.right
+            );
+
+            if (!isInside) {
+                dialogoExclusao.close();
+            }
+        });
+    </script>
 </body>
 
 </html>
